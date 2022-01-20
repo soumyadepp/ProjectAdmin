@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= user %>
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .header {
+            height: 75px;
+            background: #0d0d0d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.13);
+        }
+        
+        .header-left {
+            padding: 10px;
+        }
+        
+        .header-left>h1 {
+            font-size: 4vmin;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .header-right {
+            padding: 10px;
+        }
+        
+        .nav-list {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            list-style: none;
+        }
+        
+        .nav-list>li {
+            margin-inline-start: 10px;
+            margin-inline-end: 10px;
+        }
+        
+        .nav-list>li>a {
+            padding-bottom: 5px;
+            font-size: 3.5vmin;
+            color: #fff;
+            border-bottom: 2px solid transparent;
+            text-decoration: none;
+        }
+        
+        .nav-list>li>a:hover {
+            border-bottom: 2px solid #f5f5f5;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            background: #080710;
+        }
+        
+        .container-up {
+            position: relative;
+            height: 200px;
+            width: 100%;
+            padding: 20px;
+            background: url('https://images.unsplash.com/photo-1505673542670-a5e3ff5b14a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .profile-div {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-top-right-radius: 15px;
+            border-top-left-radius: 15px;
+            width: 100%;
+            position: absolute;
+            background: rgba(255, 255, 255, 0.13);
+        }
+        
+        .profile-div>h2 {
+            margin-top: 10px;
+            font-size: 4vmin;
+            color: hsl(0, 0%, 96%);
+        }
+        
+        .img-div {
+            padding: 5px;
+        }
+        
+        .img-div>img {
+            height: 15vmin;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .text-div {
+            margin-left: 15px;
+        }
+        
+        .text-div>h1 {
+            font-size: 5.5vmin;
+            color: #f5f5f5;
+            text-shadow: 2px 2px 2px #0d0d0d;
+        }
+        
+        .text-div>h2 {
+            font-size: 3vmin;
+            color: #efefef;
+        }
+        
+        .activity-div {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 100%;
+            padding: 30px;
+            background: #0d0d0d;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.13);
+        }
+        
+        .activity-div>.activity-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container-down * {
+            color: #f5f5f5;
+        }
+        
+        .container-down {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .post-header {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.13);
+        }
+        
+        .post-header * {
+            font-size: 3vmin;
+            color: #f5f5f5;
+        }
+        
+        .post-title {
+            text-align: center;
+            font-size: 3vmin;
+        }
+        
+        .post-user {
+            font-size: 2vmin;
+        }
+        
+        .post-body {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.13);
+            margin: 10px;
+            border-radius: 10px;
+            filter: drop-shadow(0px 0px 5px #000);
+        }
+        
+        .post-body>.post-text {
+            margin-top: 10px;
+            font-size: 3vmin;
+            color: #f5f5f5;
+        }
+        
+        .post-div {
+            height: 60vh;
+            margin-bottom: 10px;
+            overflow-y: scroll;
+            border-left: 2px solid rgba(255, 255, 255, 0.13);
+            border-right: 2px solid rgba(255, 255, 255, 0.13);
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.13);
+            margin-top: 10px;
+            width: 70vw;
+        }
+        
+        .post-title {
+            color: #23a2f6;
+            text-align: left;
+            font-size: 3.5vmin;
+            font-weight: 600;
+        }
+        
+        .post-header>.post-image {
+            height: 7vmin;
+            width: auto;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+        
+        .post-subheader * {
+            color: #f5f5f5;
+        }
+        
+        .post-subheader>.post-name {
+            margin-left: 10px;
+            font-size: 3vmin;
+        }
+        
+        .post-subheader>.post-date {
+            margin-left: 10px;
+            margin-top: 5px;
+            font-size: 2vmin;
+        }
+        
+         ::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        
+        .centered {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .post-footer {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .post-footer>.post-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            background: #23a2f6;
+            color: #f5f5f5;
+            width: 30%;
+        }
+        
+        .post-btn>img {
+            height: 6vmin;
+            width: 6vmin;
+            object-fit: contain;
+        }
+        
+        .like-div {
+            display: flex;
+            align-items: center;
+            width: 40%;
+        }
+        
+        .like-btn {
+            background: #23a2f6;
+            color: #f5f5f5;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        
+        .like-btn-al {
+            background: #184ad1;
+            color: #f5f5f5;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        
+        .delete-btn {
+            background: #ff512f;
+            color: #f5f5f5;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            border: none;
+            outline: none;
+        }
+        
+        .delete-div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+        }
+        
+        .delete-btn:hover {
+            background: #d10023;
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-left">
+            <h1>
+                <%= user %>
+            </h1>
+        </div>
+        <div class="header-right">
+            <ul class="nav-list">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+        </div>
+    </div>
+    <div class="container">
+        <div class="container-up">
+            <div class="profile-div">
+
+            </div>
+        </div>
+        <div class="activity-grid">
+
+        </div>
+        <div class="container-down">
+            <div class="post-div">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        let activityGrid = document.querySelector('.activity-grid');
+        activityGrid.style.background = 'rgba(255, 255, 255, 0.13)';
+        activityGrid.style.padding = '10px';
+        activityGrid.style.margin = '10px';
+        for (var i = 0; i < 7; i++) {
+            let activityRow = document.createElement('div');
+            activityRow.classList.add('activity-row');
+            activityRow.style.display = 'flex';
+            activityRow.style.justifyContent = 'center';
+            activityRow.style.alignItems = 'center';
+            for (var j = 0; j < 52; j++) {
+                let activityCol = document.createElement('div');
+                activityCol.classList.add('activity-col');
+                activityCol.style.width = '18px';
+                activityCol.style.height = '18px';
+                activityCol.style.border = '0.5px solid rgba(0,0,0,0.25)';
+                activityCol.style.background = '#23a2f6';
+                activityRow.appendChild(activityCol);
+            }
+            activityGrid.appendChild(activityRow);
+        }
+        async function fetchData() {
+            const stringname = "<%= username %>";
+            console.log(stringname);
+            var mapData = new Map();
+            const mapOfLikes = await fetch('/likesmap').then(res => res.json())
+                .then(data => {
+                    data.forEach(like => {
+                        mapData.set(like.crid, like.count);
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            var mapUserLikes = new Map();
+            const mapUsers = await fetch('/likes/' + '<%= username %>')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(like => {
+                        mapUserLikes.set(like.postid, true);
+                    })
+                })
+            const data = await fetch('/users/api/' + stringname)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    const user = "<%= user %>";
+                    if (user === "My profile") {
+                        console.log('Edit')
+                    }
+                    const containerRight = document.querySelector('.profile-div');
+                    containerRight.innerHTML = `
+                <div class="img-div">
+                    <img src ="https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_1280.png"/>
+                </div>
+                <div class="text-div">
+                <h1>${data[0].username}</h1>
+                <h2>${data[0].email}</h2>
+                </div>
+                `;
+                })
+                .catch(error => console.log(error));
+
+            const postData = await fetch('/posts/' + stringname).
+            then(response => response.json()).then(data => {
+                data.forEach(post => {
+                    var date = new Date(post.reviewdate).toDateString();
+                    const now = new Date().toDateString();
+                    console.log(date);
+                    console.log(now);
+                    if (date === now) {
+                        date = "Today";
+                    }
+                    const containerLeft = document.querySelector('.post-div');
+                    containerLeft.innerHTML += `
+                <div class="post-header">
+                    <img src = "https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_1280.png" class="post-image">
+                    <div class="post-subheader">
+                        <h3 class="post-name">${post.username}</h3>
+                        <span class="post-date">${date}</span>
+                    </div>
+                </div>
+                <div class="post-body">
+                    <h3 class="post-title">${post.title}</h3>
+                    <p class="post-text">${post.description}</p>
+                </div>
+                 <div class="post-footer">
+                    
+                    <form class="like-div" action="${"<%= username %>" == post.username ?"/posts/likes/mylike" : "/posts/likes"}" method="POST">
+                        <input type="hidden" name="postid" value="${post.crid}">
+                        <input type="hidden" name="username" value="${post.username}">
+                        <input type="submit" class="${mapUserLikes.get(post.crid)==true?"like-btn":"like-btn-al"}" value="${mapUserLikes.get(post.crid) == true? 'Liked' : 'Like'}" onclick="e=>e.preventDefault()">
+                        <p style="color:#f5f5f5;background:#184ad1; padding:8.5px; border-top-right-radius:10px; border-bottom-right-radius:10px;">${mapData.get(post.crid) == undefined? 0 : mapData.get(post.crid)}</p>
+                    </form>
+                    <form class="delete-div" style=${"<%= sessionUser %>" == post.username ?"display:block;" : "display:none;"} action = "/posts/delete/${post.crid}" method = "POST">
+                        <input type="submit" class="delete-btn" value="Delete" onclick="e=>e.preventDefault()"/>
+                    </form>
+                </div>
+
+                `;
+                })
+                if (data.length === 0) {
+                    document.querySelector('.post-div').innerHTML = `
+                <div class="post-body" style="display:flex; justify-content:center; align-items:center;">
+                <h2 class="post-title" style="text-align:center;">No posts yet</h2>
+                </div>
+                `;
+                }
+            });
+        }
+        fetchData();
+    </script>
+</body>
+
+</html>

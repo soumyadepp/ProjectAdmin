@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@500;600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            background: #114ea5;
+        }
+        
+        .wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        
+        .list-container {
+            padding: 20px;
+            background: linear-gradient(to bottom, #f5f5f5, #f5acff);
+            border-radius: 10px;
+            filter: drop-shadow(0px 0px 10px #000);
+        }
+        
+        .list-header {
+            text-align: center;
+            font-size: 4vmin;
+            color: #000d1a;
+        }
+        
+        .table {
+            height: 80vh;
+            padding: 5px;
+        }
+        
+        tr {
+            border: 1px solid #000;
+        }
+        
+        td {
+            background: linear-gradient(to bottom, #f5f5f5, #efefef);
+            padding: 10px;
+            border: 1px solid #000;
+            font-size: 2.5vmin;
+        }
+        
+        td>a {
+            text-decoration: none;
+            color: #000;
+        }
+        
+        td>a:hover {
+            color: #3f3f3f;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .contribute-div {
+            margin: 20px;
+            border-radius: 10px;
+            padding: 30px;
+            background: #fff;
+            color: #000;
+        }
+        
+        .c-list {
+            list-style: none;
+        }
+        
+        .c-item {
+            background: #efefef;
+            border-radius: 5px;
+            font-size: 4vmin;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        
+        .c-item:hover {
+            background: #f6f6f6;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .c-item>a {
+            color: #3f3f3f;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="list-container">
+                <table class="table">
+                    <h2 class="list-header">Routes</h2>
+                    <tr>
+                        <th>Sr.no</th>
+                        <th>Route</th>
+                        <th>Description</th>
+                        <th>Method</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="/users">/users</a></td>
+                        <td>Display all registered admins</td>
+                        <td>GET</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><a href="/houses">/houses</a></td>
+                        <td>Display all houses</td>
+                        <td>GET</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>/houses/register</td>
+                        <td>Contribute house data</td>
+                        <td>POST</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><a href="/rooms">/rooms</a></td>
+                        <td>Display all rooms</td>
+                        <td>GET</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>/rooms/register</td>
+                        <td>Contribute room data</td>
+                        <td>POST</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><a href="/customers">/customers</a></td>
+                        <td>Register a new customer</td>
+                        <td>POST</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

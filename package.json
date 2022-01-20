@@ -1,0 +1,28 @@
+{
+    "name": "findmydorm-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.24.0",
+        "body-parser": "^1.19.1",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "ejs": "^3.1.6",
+        "express": "^4.17.2",
+        "express-session": "^1.17.2",
+        "history": "^5.2.0",
+        "method-override": "^3.0.0",
+        "nodemon": "^2.0.15",
+        "pg": "^8.7.1",
+        "uuid": "^8.3.2"
+    }
+}

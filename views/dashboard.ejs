@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@500;600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .header {
+            height: 75px;
+            background: #0d0d0d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.13);
+        }
+        
+        .header-left {
+            padding: 10px;
+        }
+        
+        .header-left>h1 {
+            font-size: 4vmin;
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .header-right {
+            padding: 10px;
+        }
+        
+        .nav-list {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            list-style: none;
+        }
+        
+        .nav-list>li {
+            margin-inline-start: 10px;
+            margin-inline-end: 10px;
+        }
+        
+        .nav-list>li>a {
+            padding-bottom: 5px;
+            font-size: 3.5vmin;
+            color: #fff;
+            border-bottom: 2px solid transparent;
+            text-decoration: none;
+        }
+        
+        .nav-list>li>a:hover {
+            border-bottom: 2px solid #f5f5f5;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .container {
+            height: calc(100vh - 75px);
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        
+        @media(max-width:800px) {
+            .container {
+                flex-direction: column-reverse;
+            }
+        }
+        
+        .left {
+            height: calc(100vh - 75px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #080710;
+            padding: 15px;
+        }
+        
+        @media(max-width:800px) {
+            .left {
+                display: none;
+            }
+        }
+        
+        .center {
+            flex: 1;
+            background: #080710;
+            overflow-y: scroll;
+            height: calc(100vh - 75px);
+            border-left: 2px solid rgba(255, 255, 255, 0.13);
+            width: 100%;
+        }
+        
+        .left>.icon {
+            height: 10vmin;
+            width: auto;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+        
+        .admin-details {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            list-style: none;
+        }
+        
+        .admin-details>li {
+            background: #184ad1;
+            padding: 10px;
+            width: 100%;
+            margin: 7px;
+            border-radius: 10px;
+            color: #efefef;
+            font-size: 3vmin;
+            text-align: center;
+        }
+        
+        .admin-details>li:hover {
+            background: #23a2f6;
+            transition: all 0.2s ease-in;
+            -webkit-transition: all 0.2s ease-in-out;
+        }
+        
+        .admin-details>li>a {
+            color: #f5f5f5;
+            text-decoration: none;
+        }
+        
+        .tasks-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        
+        .task-header {
+            font-size: 4.5vmin;
+            color: #f09819;
+        }
+        
+        .user-name {
+            margin-top: 10px;
+            color: #f5f5f5;
+            font-size: 2.5vmin;
+        }
+        
+        .user-email {
+            font-size: 2vmin;
+            color: #f09819;
+        }
+        
+        .task-input {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-inline-end: 5px;
+            font-size: 2.5vmin;
+            margin-top: 10px;
+        }
+        
+        .task-input-ta {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 2.5vmin;
+            margin-top: 10px;
+            resize: none;
+        }
+        
+        .submit-btn {
+            padding: 8px;
+            font-size: 3vmin;
+            border: none;
+            outline: none;
+            margin-top: 10px;
+            border-radius: 10px;
+            background: #ff512f;
+            color: #f5f5f5;
+            width: 100%;
+        }
+        
+        .right-container {
+            border-left: 2px solid rgba(255, 255, 255, 0.13);
+            height: calc(100vh - 75px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: #080710;
+            flex: 0.55;
+        }
+        
+        @media(max-width:800px) {
+            .right-container {
+                width: 100%;
+                flex: 0.4;
+            }
+        }
+        
+        .right-container>h2 {
+            text-align: center;
+        }
+        
+        .right {
+            padding: 5px;
+            max-height: 55vh;
+            background: transparent;
+            margin: 10px;
+            overflow-y: scroll;
+        }
+        
+        .right>h2 {
+            padding: 10px;
+        }
+        
+         ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        
+        .info-div {
+            padding: 10px;
+            background-color: #fff;
+        }
+        
+        .info-div>p {
+            margin-top: 10px;
+            font-size: 3vmin;
+        }
+        
+        .post-header {
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.13);
+        }
+        
+        .post-header * {
+            font-size: 3vmin;
+            color: #f5f5f5;
+        }
+        
+        .post-title {
+            text-align: center;
+            font-size: 3vmin;
+        }
+        
+        .post-user {
+            font-size: 2vmin;
+        }
+        
+        .post-body {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.13);
+            margin: 10px;
+            border-radius: 10px;
+            filter: drop-shadow(0px 0px 5px #000);
+        }
+        
+        .post-body>.post-text {
+            margin-top: 10px;
+            font-size: 3vmin;
+            color: #f5f5f5;
+        }
+        
+        .post-title {
+            color: #23a2f6;
+            text-align: left;
+            font-size: 3.5vmin;
+            font-weight: 600;
+        }
+        
+        .post-header>.post-image {
+            height: 7vmin;
+            width: auto;
+            border-radius: 50%;
+            object-fit: contain;
+        }
+        
+        .post-subheader * {
+            color: #f5f5f5;
+        }
+        
+        .post-subheader>.post-name {
+            margin-left: 10px;
+            font-size: 3vmin;
+        }
+        
+        .post-subheader>.post-date {
+            margin-left: 10px;
+            margin-top: 5px;
+            font-size: 2vmin;
+        }
+        
+        .user-link {
+            text-decoration: none;
+        }
+        
+        .user-name>a {
+            color: #f5f5f5;
+            text-decoration: none;
+        }
+        
+        .user-name>a:hover {
+            color: #cae7df;
+            transition: all 0.2s ease-in-out;
+            -webkit-transition: all 0.2s ease-in-out;
+        }
+        
+        .user-link:hover {
+            color: #cae7df;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .post-footer {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .post-footer>.post-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px;
+            background: #23a2f6;
+            color: #f5f5f5;
+            width: 30%;
+        }
+        
+        .post-btn>img {
+            height: 6vmin;
+            width: 6vmin;
+            object-fit: contain;
+        }
+        
+        .like-div {
+            display: flex;
+            align-items: center;
+            width: 40%;
+        }
+        
+        .like-btn {
+            background: #23a2f6;
+            color: #f5f5f5;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        
+        .like-btn-al {
+            background: #184ad1;
+            color: #f5f5f5;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+        
+        .delete-btn {
+            background: #ff512f;
+            color: #f5f5f5;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100%;
+            border: none;
+            outline: none;
+        }
+        
+        .delete-div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+        }
+        
+        .delete-btn:hover {
+            background: #d10023;
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-left">
+            <h1>Admin Dashboard</h1>
+        </div>
+        <div class="header-right">
+            <ul class="nav-list">
+                <li><a href="/">Home</a></li>
+                <li><a href="/logout">Logout</a></li>
+        </div>
+    </div>
+    <div class="container">
+        <div class="left">
+            <img class="icon" src="data:image/png;base64,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"
+            />
+            <h3 class="user-name">
+                <a href="/users/<%=user%>">
+                    <%= user %>
+                </a>
+            </h3>
+            <span class="user-email">
+                <%= email %>
+            </span>
+            <ul class="admin-details" id="admin-details">
+                <li>
+                    <a href="/logout">Logout</a>
+                </li>
+                <li>
+                    <a href="/customers">Customers</a>
+                </li>
+                <li>
+                    <a href="/rooms">Dorms</a>
+                </li>
+                <li>
+                    <a href="/houses">Houses</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="center" id="center">
+        </div>
+        <div class="right-container">
+            <form class="tasks-form" action="/posts" method="POST">
+                <h2 class="task-header">Add a Code review</h2>
+                <div style="display: flex">
+                    <input class="task-input" type="date" name="date" required="required" placeholder="Enter deadline">
+                    <input class="task-input" type="text" name="title" required="required" placeholder="Title">
+                </div>
+                <textarea class="task-input-ta" type="text" name="task" required="required" placeholder="Review Here" rows="9"></textarea>
+                <button class="submit-btn" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+        async function fetchNotifications() {
+            const notifData = await fetch('/users/notifications')
+                .then(res => res.json())
+                .then(data => {
+                    const len = data.filter(notif => notif.isseen === false).length;
+                    if (len > 0) {
+                        document.getElementById("admin-details").innerHTML =
+                            `
+                 <li>
+                    <a href="/logout">Logout</a>
+                </li>
+                <li>
+                    <a href="/customers">Customers</a>
+                </li>
+                <li>
+                    <a href="/rooms">Dorms</a>
+                </li>
+                <li>
+                    <a href="/houses">Houses</a>
+                </li>
+                <li><a href ="/notifs">Notifications </a>
+                <span style= "background:#d10023; margin-left:10px; width:100%; margin-bottom:10px;color:#f5f5f5; padding:5px; font-size:2.5vmin;  border-radius : 10px;">${len}</span>
+                </li>
+                `;
+                    } else {
+                        document.getElementById("admin-details").innerHTML = `
+                     <li>
+                    <a href="/logout">Logout</a>
+                </li>
+                <li>
+                    <a href="/customers">Customers</a>
+                </li>
+                <li>
+                    <a href="/rooms">Dorms</a>
+                </li>
+                <li>
+                    <a href="/houses">Houses</a>
+                </li>
+                    <li><a href="/notifs">Notifications</a></li>
+                    `;
+                    }
+                })
+        }
+        async function dataFetch() {
+            var mapData = new Map();
+            const mapOfLikes = await fetch('/likesmap').then(res => res.json())
+                .then(data => {
+                    data.forEach(like => {
+                        mapData.set(like.crid, like.count);
+                    })
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+            var mapUserLikes = new Map();
+            const mapUsers = await fetch('/likes/' + '<%= user %>')
+                .then(res => res.json())
+                .then(data => {
+                    data.forEach(like => {
+                        mapUserLikes.set(like.postid, true);
+                    })
+                })
+            const data = await fetch('/posts').
+            then(res => res.json()).
+            then(data => {
+                console.log(data);
+                data.forEach(post => {
+                    const postDiv = document.createElement('div');
+                    postDiv.style.display = 'flex';
+                    postDiv.style.flexDirection = 'column';
+                    postDiv.classList.add('post');
+                    postDiv.style.backgroundColor = 'rgba(255,255,255,0.13)';
+                    postDiv.style.borderRadius = '10px';
+                    postDiv.style.margin = '10px';
+                    postDiv.style.padding = '10px';
+                    var name = post.username;
+                    const nameOld = '<%= user %>';
+                    if (name == nameOld) {
+                        name = "Me";
+                    }
+                    var date = new Date(post.reviewdate).toDateString();
+                    const now = new Date().toDateString();
+                    console.log(date);
+                    console.log(now);
+                    if (date === now) {
+                        date = "Today";
+                    }
+                    postDiv.innerHTML = `
+                <div class="post-header">
+                    <img src = "https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_1280.png" class="post-image">
+                    <div class="post-subheader">
+                        <h3 class="post-name"><a class="user-link" href="/users/${post.username}">${name}</a></h3>
+                        <span class="post-date">Due ${date}</span>
+                    </div>
+                </div>
+                <div class="post-body">
+                    <h3 class="post-title">${post.title}</h3>
+                    <p class="post-text">${post.description}</p>
+                </div>
+                <div class="post-footer">
+                    
+                    <form class="like-div" action="/posts/likes" method="POST">
+                        <input type="hidden" name="postid" value="${post.crid}">
+                        <input type="hidden" name="username" value="${post.username}">
+                        <input type="submit" class="${mapUserLikes.get(post.crid)==true?"like-btn":"like-btn-al"}" value="${mapUserLikes.get(post.crid) == true? 'Liked' : 'Like'}" onclick="e=>e.preventDefault()">
+                        <p style="color:#f5f5f5;background:#184ad1; padding:7.5px; border-top-right-radius:10px; border-bottom-right-radius:10px;">${mapData.get(post.crid) == undefined? 0 : mapData.get(post.crid)}</p>
+                    </form>
+                    <form class="delete-div" style=${"<%= user %>" == post.username ?"display:block;" : "display:none;"} action = "/posts/delete/${post.crid}" method = "POST">
+                        <input type="submit" class="delete-btn" value="Delete" onclick="e=>e.preventDefault()"/>
+                    </form>
+                </div>
+                    `;
+                    document.getElementById('center').appendChild(postDiv);
+                    document.getElementById('center').style.overflowY = 'scroll';
+                });
+            });
+        }
+        fetchNotifications();
+        dataFetch();
+    </script>
+</body>
+
+</html>
