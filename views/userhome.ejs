@@ -92,7 +92,7 @@
             padding: 15px;
             border-top-right-radius: 15px;
             border-top-left-radius: 15px;
-            width: 100%;
+            width: 90%;
             position: absolute;
             background: rgba(255, 255, 255, 0.13);
         }
@@ -138,6 +138,7 @@
             padding: 30px;
             background: #0d0d0d;
             border-bottom: 2px solid rgba(255, 255, 255, 0.13);
+            overflow-x: scroll;
         }
         
         .activity-div>.activity-row {
@@ -349,27 +350,6 @@
         </div>
     </div>
     <script>
-        let activityGrid = document.querySelector('.activity-grid');
-        activityGrid.style.background = 'rgba(255, 255, 255, 0.13)';
-        activityGrid.style.padding = '10px';
-        activityGrid.style.margin = '10px';
-        for (var i = 0; i < 7; i++) {
-            let activityRow = document.createElement('div');
-            activityRow.classList.add('activity-row');
-            activityRow.style.display = 'flex';
-            activityRow.style.justifyContent = 'center';
-            activityRow.style.alignItems = 'center';
-            for (var j = 0; j < 52; j++) {
-                let activityCol = document.createElement('div');
-                activityCol.classList.add('activity-col');
-                activityCol.style.width = '18px';
-                activityCol.style.height = '18px';
-                activityCol.style.border = '0.5px solid rgba(0,0,0,0.25)';
-                activityCol.style.background = '#23a2f6';
-                activityRow.appendChild(activityCol);
-            }
-            activityGrid.appendChild(activityRow);
-        }
         async function fetchData() {
             const stringname = "<%= username %>";
             console.log(stringname);
@@ -460,6 +440,69 @@
             });
         }
         fetchData();
+
+        function convert(str) {
+            var date = new Date(str),
+                mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+                day = ("0" + date.getDate()).slice(-2);
+            return [date.getFullYear(), mnth, day].join("-");
+        }
+        async function getActivity() {
+            var mp = new Map();
+            const activityData = await fetch('/activity/<%=username%>')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    data.forEach(activity => {
+                        var d = convert(activity.reviewdate);
+                        console.log(d);
+                        mp.set(d, activity.count);
+                    })
+                })
+            let activityHeaders = document.createElement('div');
+            activityHeaders.classList.add('activity-header');
+            let activityGrid = document.querySelector('.activity-grid');
+            activityGrid.style.background = 'rgba(255, 255, 255, 0.13)';
+            activityGrid.style.padding = '10px';
+            activityGrid.style.margin = '10px';
+            activityGrid.style.borderRadius = '10px';
+            activityGrid.style.maxWidth = '95vw';
+            activityGrid.style.overflowX = 'scroll';
+            var d = new Date();
+            d.setDate(d.getDate() - 364);
+            var p = d;
+            d = new Date();
+            for (var i = 0; i < 7; i++) {
+                let activityRow = document.createElement('div');
+                activityRow.classList.add('activity-row');
+                activityRow.style.display = 'flex';
+                activityRow.style.justifyContent = 'center';
+                activityRow.style.alignItems = 'center';
+                for (var j = 0; j < 52; j++) {
+                    let activityCol = document.createElement('div');
+                    activityCol.classList.add('activity-col');
+                    activityCol.style.width = '3vmin';
+                    activityCol.style.height = '3vmin';
+                    activityCol.style.border = '0.5px solid #f5f5f5';
+                    var chk = convert(p);
+                    p.setDate(p.getDate() + 1);
+                    console.log(chk);
+                    if (mp.get(chk) == undefined) {
+                        activityCol.style.background = '#23daf6';
+                    } else if (mp.get(chk) > 0 && mp.get(chk) < 3)
+                        activityCol.style.background = '#23a2f6';
+                    else if (mp.get(chk) >= 3 && mp.get(chk) < 5)
+                        activityCol.style.background = '#184ad1';
+                    else if (mp.get(chk) >= 5) {
+                        activityCol.style.background = '#0f4c75';
+                    }
+
+                    activityRow.appendChild(activityCol);
+                }
+                activityGrid.appendChild(activityRow);
+            }
+        }
+        getActivity();
     </script>
 </body>
 

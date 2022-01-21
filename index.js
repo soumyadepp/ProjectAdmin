@@ -18,7 +18,7 @@ const roomRoutes = require('./routes/rooms.js');
 const postRoutes = require('./routes/posts.js');
 const likeRoutes = require('./routes/likes.js');
 const notificationRoutes = require('./routes/notifications.js');
-
+const activityRoutes = require('./routes/activity.js');
 //use a body parser to get beautified output
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -41,7 +41,8 @@ app.use(likeRoutes);
 //likes routes
 app.use(notificationRoutes);
 //notif routes
-
+app.use(activityRoutes);
+//activity routes
 app.get('/', (req, res) => {
     res.render('index', { user: req.session.userid });
 });
