@@ -61,7 +61,7 @@ app.get('/dashboard', (req, res) => {
     if (!req.session.userid) {
         res.redirect('/login');
     } else {
-        res.render('dashboard', { user: req.session.userid, email: req.session.email });
+        res.render('dashboard', { user: req.session.userid, email: req.session.email, image: req.session.profileImage });
     }
 });
 
@@ -87,13 +87,20 @@ app.get('/notifs', async(req, res) => {
 app.get('/unauth', (req, res) => {
     res.render('unauthenticated');
 })
-
-app.get('/users/:id', (req, res) => {
+app.get('/notfound', (req, res) => {
+    res.render('404');
+})
+app.get('/users/:id', async(req, res) => {
     try {
-        if (req.session.userid)
-            res.render('userhome', { user: req.params.id == req.session.userid ? "My profile" : req.params.id, username: req.params.id, sessionUser: req.session.userid });
-        else {
-            res.redirect('/unauth');
+        const resp = await pool.query('SELECT * FROM users WHERE username = $1', [req.params.id]);
+        if (resp.rows.length > 0) {
+            if (req.session.userid)
+                res.render('userhome', { user: req.params.id == req.session.userid ? "My profile" : req.params.id, username: req.params.id, sessionUser: req.session.userid });
+            else {
+                res.redirect('/unauth');
+            }
+        } else {
+            res.redirect('/notfound');
         }
     } catch (error) {
         console.log(error);

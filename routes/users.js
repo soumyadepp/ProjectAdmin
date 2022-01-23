@@ -5,6 +5,7 @@ const pool = require('../database/db.js');
 const { v4: uuidv4 } = require('uuid');
 //require middleware
 const middlewares = require('../middleware/middlewares.js');
+const { isRequired } = require('nodemon/lib/utils');
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -40,8 +41,7 @@ router.get('/users/api/:uname', async(req, res) => {
     }
 });
 
-
-
+//login function
 router.post('/users/login', async(req, res) => {
     try {
         const session = req.session;

@@ -203,7 +203,13 @@
             padding: 10px;
             background: rgba(255, 255, 255, 0.13);
             margin-top: 10px;
-            width: 70vw;
+            width: 60vw;
+        }
+        
+        @media(max-width:1024px) {
+            .post-div {
+                width: 100vw;
+            }
         }
         
         .post-title {
@@ -266,6 +272,17 @@
         .post-btn>img {
             height: 6vmin;
             width: 6vmin;
+            object-fit: contain;
+        }
+        
+        .post-image {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .post-image>img {
+            width: 100%;
+            height: auto;
             object-fit: contain;
         }
         
@@ -413,6 +430,9 @@
                 </div>
                 <div class="post-body">
                     <h3 class="post-title">${post.title}</h3>
+                    <div class="post-image">
+                        <img src = ${post.imagelink} alt=""/>
+                    </div>
                     <p class="post-text">${post.description}</p>
                 </div>
                  <div class="post-footer">
@@ -448,6 +468,7 @@
             return [date.getFullYear(), mnth, day].join("-");
         }
         async function getActivity() {
+            //heatmap code
             var mp = new Map();
             const activityData = await fetch('/activity/<%=username%>')
                 .then(response => response.json())
@@ -496,7 +517,6 @@
                     else if (mp.get(chk) >= 5) {
                         activityCol.style.background = '#0f4c75';
                     }
-
                     activityRow.appendChild(activityCol);
                 }
                 activityGrid.appendChild(activityRow);

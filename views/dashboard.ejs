@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@500;600;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
@@ -18,6 +19,10 @@
             -webkit-box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
             scroll-behavior: smooth;
+        }
+        
+         :root {
+            --effect: hover 1s linear infinite;
         }
         
         .header {
@@ -33,6 +38,12 @@
             padding: 10px;
         }
         
+        @media(max-width:1024px) {
+            .header-left {
+                display: none;
+            }
+        }
+        
         .header-left>h1 {
             font-size: 4vmin;
             font-weight: 600;
@@ -41,6 +52,40 @@
         
         .header-right {
             padding: 10px;
+        }
+        
+        .search {
+            width: 65%;
+        }
+        
+        @media(max-width:1024px) {
+            .search {
+                width: 100%;
+            }
+        }
+        
+        option {
+            padding: 5px;
+        }
+        
+        .search-bar {
+            margin-inline-start: 10px;
+            width: 50%;
+            padding: 10px;
+            outline: none;
+            border: none;
+            color: #f5f5f5;
+            background: rgba(255, 255, 255, 0.13);
+            border-radius: 10px;
+        }
+        
+        .search-btn {
+            padding: 8px;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            background: #184ad1;
+            color: #f5f5f5;
         }
         
         .nav-list {
@@ -76,7 +121,7 @@
             justify-content: space-evenly;
         }
         
-        @media(max-width:800px) {
+        @media(max-width:1024px) {
             .container {
                 flex-direction: column-reverse;
             }
@@ -92,7 +137,7 @@
             padding: 15px;
         }
         
-        @media(max-width:800px) {
+        @media(max-width:1024px) {
             .left {
                 display: none;
             }
@@ -175,7 +220,6 @@
             border: none;
             outline: none;
             width: 100%;
-            margin-inline-end: 5px;
             font-size: 2.5vmin;
             margin-top: 10px;
         }
@@ -215,10 +259,34 @@
             flex: 0.55;
         }
         
-        @media(max-width:800px) {
+        .open-right-container {
+            display: none;
+        }
+        
+        @media(max-width:1024px) {
             .right-container {
+                display: none;
+            }
+            .open-right-container {
+                padding: 20px;
+                background: #080710;
+                display: block;
                 width: 100%;
-                flex: 0.4;
+            }
+            .open-right-container>.right-container-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .open-right-container>.right-container-header>.head {
+                font-size: 4.5vmin;
+                color: #f09819;
+            }
+            .open-right-container>.right-container-header>.icon {
+                padding: 5px;
+                font-size: 5.5vmin;
+                font-weight: bolder;
+                color: #f5f5f5;
             }
         }
         
@@ -361,6 +429,16 @@
             object-fit: contain;
         }
         
+        .post-image {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .post-image>img {
+            width: 100%;
+            height: auto;
+        }
+        
         .like-div {
             display: flex;
             align-items: center;
@@ -410,6 +488,117 @@
             background: #d10023;
             transition: all 0.2s ease-in-out;
         }
+        
+        .info-div {
+            margin: 10px;
+            border-radius: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.13);
+            color: #f5f5f5;
+        }
+        
+        .info-div>h2 {
+            font-size: 4.5vmin;
+        }
+        
+        .info-div>li {
+            padding: 5px;
+            margin-top: 5px;
+            list-style: decimal;
+            font-size: 3vmin;
+        }
+        
+        .info-div>li>a {
+            color: #23a2f6;
+            text-decoration: none;
+        }
+        
+        #loadingDiv {
+            position: absolute;
+            ;
+            top: 0;
+            left: 0;
+            width: 100%;
+            margin-top: 60px;
+            height: calc(100vh - 75px);
+            background-color: #080710;
+        }
+        
+        .loader {
+            position: absolute;
+            top: 45%;
+            left: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        @media(max-width:1024px) {
+            .loader {
+                top: 50%;
+                left: 30%;
+            }
+        }
+        
+        .loader>p {
+            display: inline-block;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 10vmin;
+            font-family: arial;
+            font-weight: 600;
+            transform: scale(.5);
+            color: #121212;
+            -webkit-text-stroke: 2px gray;
+        }
+        
+        .loader>p:nth-child(1) {
+            animation: var(--effect);
+        }
+        
+        .loader>p:nth-child(2) {
+            animation: var(--effect) .125s;
+        }
+        
+        .loader>p:nth-child(3) {
+            animation: var(--effect) .25s;
+        }
+        
+        .loader>p:nth-child(4) {
+            animation: var(--effect) .375s;
+        }
+        
+        .loader>p:nth-child(5) {
+            animation: var(--effect) .5s;
+        }
+        
+        .loader>p:nth-child(6) {
+            animation: var(--effect) .675s;
+        }
+        
+        .loader>p:nth-child(7) {
+            animation: var(--effect) .75s;
+        }
+        
+        @keyframes hover {
+            0% {
+                transform: scale(.5);
+                color: #121212;
+                -webkit-text-stroke: 2px #cae7df;
+            }
+            20% {
+                transform: scale(1);
+                color: #23a2f6;
+                -webkit-text-stroke: 3px #ff512f;
+                filter: drop-shadow(0 0 1px #080710)drop-shadow(0 0 1px #080710)drop-shadow(0 0 3px #ff512f)drop-shadow(0 0 5px #ff512f)hue-rotate(10turn);
+            }
+            50% {
+                transform: scale(.5);
+                color: #121212;
+                -webkit-text-stroke: 2px gray;
+            }
+        }
     </style>
 </head>
 
@@ -418,10 +607,19 @@
         <div class="header-left">
             <h1>Admin Dashboard</h1>
         </div>
+        <div class="search">
+            <datalist id="suggestions">
+            </datalist>
+            <form id="search-form" action="" method="GET">
+                <input type="select" class="search-bar" id="search-bar" placeholder="Search" spellcheck="false" list="suggestions">
+                <input type="submit" class="search-btn" value="Submit">
+            </form>
+        </div>
         <div class="header-right">
             <ul class="nav-list">
                 <li><a href="/">Home</a></li>
                 <li><a href="/logout">Logout</a></li>
+            </ul>
         </div>
     </div>
     <div class="container">
@@ -449,24 +647,80 @@
                 <li>
                     <a href="/houses">Houses</a>
                 </li>
-
             </ul>
         </div>
         <div class="center" id="center">
+            <div class="info-div">
+                <h2>To create a code review Follow these steps :</h2>
+                <li>Go to <a href="https://carbon.now.sh/">carbon </a> code snippet creator</li>
+                <li>Create a code snippet.</li>
+                <li>Upload to imgur</li>
+                <li>Copy the link and paste it in the form</li>
+                <li>Submit the form</li>
+                <div id="loadingDiv">
+                    <div class="loader">
+                        <p>l</p>
+                        <p>o</p>
+                        <p>a</p>
+                        <p>d</p>
+                        <p>i</p>
+                        <p>n</p>
+                        <p>g</p>
+                    </div>
+
+                </div>
+            </div>
         </div>
         <div class="right-container">
             <form class="tasks-form" action="/posts" method="POST">
                 <h2 class="task-header">Add a Code review</h2>
                 <div style="display: flex">
-                    <input class="task-input" type="date" name="date" required="required" placeholder="Enter deadline">
+                    <input class="task-input" type="date" name="date" required="required" style="margin-right: 5px;" placeholder="Enter deadline">
                     <input class="task-input" type="text" name="title" required="required" placeholder="Title">
                 </div>
+                <input class="task-input" type="text" name="image" placeholder="Image Link">
                 <textarea class="task-input-ta" type="text" name="task" required="required" placeholder="Review Here" rows="9"></textarea>
                 <button class="submit-btn" type="submit">Add</button>
             </form>
         </div>
+        <div class="open-right-container">
+            <div class="right-container-header">
+                <h2 class="head">Create a code review</h2>
+                <h2 class="icon" onclick="openDiv()">+</h2>
+            </div>
+        </div>
     </div>
     <script>
+        function removeLoader() {
+            $("#loadingDiv").fadeOut(500, function() {
+                // fadeOut complete. Remove the loading div
+                $("#loadingDiv").remove(); //makes page more lightweight 
+            });
+        }
+        $(function() {
+            $('#search-form').submit(function() {
+                var user = $('#search-bar').val();
+                $(this).attr('action', "users/" + user);
+            });
+        });
+
+        function goTo(e) {
+            var srch = document.getElementById("search").value;
+            window.location.href = "/users/" + srch;
+        }
+
+        function openDiv() {
+            var clk = document.querySelector(".right-container-header>.icon");
+            var rightDiv = document.querySelector(".right-container");
+            if (rightDiv.style.display == 'none') {
+                rightDiv.style.display = 'flex';
+                rightDiv.style.width = '100%';
+                clk.innerHTML = '-';
+            } else {
+                rightDiv.style.display = 'none';
+                clk.innerHTML = '+';
+            }
+        }
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
@@ -514,6 +768,18 @@
                 })
         }
         async function dataFetch() {
+            const loader = document.getElementById("loadingDiv");
+            loader.style.display = "block";
+            const dataUser = await fetch('/users')
+                .then(res => res.json())
+                .then(users => {
+                    users.forEach(user => {
+                        console.log(user);
+                        document.getElementById("suggestions").innerHTML += `
+                        <option value = ${user.username}>${user.email}</option>
+                        `;
+                    })
+                })
             var mapData = new Map();
             const mapOfLikes = await fetch('/likesmap').then(res => res.json())
                 .then(data => {
@@ -535,7 +801,6 @@
             const data = await fetch('/posts').
             then(res => res.json()).
             then(data => {
-                console.log(data);
                 data.forEach(post => {
                     const postDiv = document.createElement('div');
                     postDiv.style.display = 'flex';
@@ -552,8 +817,6 @@
                     }
                     var date = new Date(post.reviewdate).toDateString();
                     const now = new Date().toDateString();
-                    console.log(date);
-                    console.log(now);
                     if (date === now) {
                         date = "Today";
                     }
@@ -562,15 +825,17 @@
                     <img src = "https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_1280.png" class="post-image">
                     <div class="post-subheader">
                         <h3 class="post-name"><a class="user-link" href="/users/${post.username}">${name}</a></h3>
-                        <span class="post-date">Due ${date}</span>
+                        <span class="post-date">${date}</span>
                     </div>
                 </div>
                 <div class="post-body">
                     <h3 class="post-title">${post.title}</h3>
                     <p class="post-text">${post.description}</p>
+                    <div class="post-image">
+                        <img src="${post.imagelink}" class="post-image" alt ="">
+                    </div>
                 </div>
                 <div class="post-footer">
-                    
                     <form class="like-div" action="/posts/likes" method="POST">
                         <input type="hidden" name="postid" value="${post.crid}">
                         <input type="hidden" name="username" value="${post.username}">
@@ -586,6 +851,7 @@
                     document.getElementById('center').style.overflowY = 'scroll';
                 });
             });
+            loader.style.display = "none";
         }
         fetchNotifications();
         dataFetch();
