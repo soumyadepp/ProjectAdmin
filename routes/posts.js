@@ -51,7 +51,7 @@ router.get('/posts/:uname', async(req, res) => {
     try {
         const session = req.session;
         if (session.userid) {
-            const response = await pool.query('SELECT * FROM codereviews WHERE username = $1', [req.params.uname]);
+            const response = await pool.query('SELECT * FROM codereviews WHERE username = $1 order by reviewdate desc', [req.params.uname]);
             res.send(response.rows);
         } else {
             res.redirect('/unauth');

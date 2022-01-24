@@ -77,15 +77,21 @@
         
         .list-container {
             position: relative;
-            width: 60%;
+            width: 70%;
             min-height: calc(100vh - 75px);
             background: rgba(255, 255, 255, 0.13);
             max-height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: start;
             padding: 20px;
+        }
+        
+        @media(max-width:1024px) {
+            .list-container {
+                width: 100%;
+            }
         }
         
         .notif-div {
