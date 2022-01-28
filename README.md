@@ -9,4 +9,5 @@ in terminal, type
 # npm start
 
 Link to Deployed Application: 
-https://findmydorm.herokuapp.com
+http://findmydorm.herokuapp.com
+**Note : Do not use https**
