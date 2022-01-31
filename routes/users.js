@@ -50,6 +50,7 @@ router.post('/users/login', async(req, res) => {
         if (response.rows.length > 0) {
             session.userid = response.rows[0].username;
             session.email = response.rows[0].email;
+            session.uid = response.rows[0].uid;
             res.redirect('/dashboard');
         } else {
             res.render('login', { error: "Invalid Credentials" });

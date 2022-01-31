@@ -33,7 +33,7 @@ router.post('/posts', async(req, res) => {
         const userid = req.session.userid;
         const id = uuidv4();
         const { date, title, image, task } = req.body;
-        const newPost = await pool.query('INSERT INTO codereviews (crid,username,reviewdate,title,description,imagelink) VALUES ($1, $2,$3,$4,$5,$6)', [id, userid, date, title, task, image])
+        const newPost = await pool.query('INSERT INTO codereviews (crid,username,reviewdate,title,description,imagelink) VALUES ($1, $2,NOW(),$3,$4,$5)', [id, userid, title, task, image])
             .then(() => {
                 console.log('posted successfully');
                 res.redirect('/dashboard');

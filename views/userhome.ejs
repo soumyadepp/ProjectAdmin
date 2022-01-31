@@ -137,9 +137,20 @@
             align-items: center;
             justify-content: space-evenly;
             background: rgba(255, 255, 255, 0.13);
-            width: 100%;
+            width: auto;
             color: #f5f5f5;
             font-size: 2.5vmin;
+        }
+        
+        .profile-info-posts {
+            padding: 10px;
+            margin: 2px;
+            width: 25vmin;
+            font-size: 3vmin;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            background: #184ad1;
+            color: #f5f5f5;
+            text-align: center;
         }
         
         .activity-div {
@@ -209,7 +220,8 @@
         }
         
         .post-div {
-            height: 100%;
+            min-height: 40vh;
+            max-height: 100%;
             margin-bottom: 10px;
             border-left: 2px solid rgba(255, 255, 255, 0.13);
             border-right: 2px solid rgba(255, 255, 255, 0.13);
@@ -233,6 +245,7 @@
         }
         
         .post-header>.post-image {
+            margin-top: -1px;
             height: 7vmin;
             width: auto;
             border-radius: 50%;
@@ -293,10 +306,19 @@
             margin-bottom: 10px;
         }
         
+        .post-image {
+            margin-top: 15px;
+            border-top: 2px solid rgba(255, 255, 255, 0.13);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
         .post-image>img {
-            width: 100%;
-            height: auto;
+            width: 75%;
+            max-height: calc(100vh - 75px);
             object-fit: contain;
+            margin-top: 20px;
         }
         
         .like-div {
@@ -348,6 +370,140 @@
             background: #d10023;
             transition: all 0.2s ease-in-out;
         }
+        
+        .follow-btn {
+            padding: 5px;
+            width: 30vmin;
+            background: linear-gradient(to right, #23244f, #184ad1);
+            color: #f5f5f5;
+            border-radius: 10px;
+            outline: none;
+            font-size: 3.5vmin;
+            border: none;
+        }
+        
+        .unfollow-btn {
+            padding: 5px;
+            width: 30vmin;
+            background: linear-gradient(to right, #184ad1, #23244f);
+            color: #f5f5f5;
+            border-radius: 10px;
+            outline: none;
+            font-size: 3.5vmin;
+            border: none;
+        }
+        
+        @media(max-width:1024px) {
+            .follow-btn {
+                margin-top: 50px;
+            }
+            .unfollow-btn {
+                margin-top: 50px;
+            }
+        }
+        
+        .follow-div {
+            top: 40%;
+            left: 80%;
+        }
+        
+        @media(max-width:1024px) {
+            .follow-div {
+                left: -6%;
+            }
+            .loader {
+                top: 0%;
+                left: 25%;
+            }
+        }
+        
+        #loadingDiv {
+            position: absolute;
+            ;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            width: 100%;
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+            background-color: #080710;
+        }
+        
+        .loader {
+            position: absolute;
+            top: 45%;
+            left: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        @media(max-width:1024px) {
+            .loader {
+                top: 50%;
+                left: 30%;
+            }
+        }
+        
+        .loader>p {
+            display: inline-block;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 10vmin;
+            font-family: arial;
+            font-weight: 600;
+            transform: scale(.5);
+            color: #121212;
+            -webkit-text-stroke: 2px gray;
+        }
+        
+        .loader>p:nth-child(1) {
+            animation: var(--effect);
+        }
+        
+        .loader>p:nth-child(2) {
+            animation: var(--effect) .125s;
+        }
+        
+        .loader>p:nth-child(3) {
+            animation: var(--effect) .25s;
+        }
+        
+        .loader>p:nth-child(4) {
+            animation: var(--effect) .375s;
+        }
+        
+        .loader>p:nth-child(5) {
+            animation: var(--effect) .5s;
+        }
+        
+        .loader>p:nth-child(6) {
+            animation: var(--effect) .675s;
+        }
+        
+        .loader>p:nth-child(7) {
+            animation: var(--effect) .75s;
+        }
+        
+        @keyframes hover {
+            0% {
+                transform: scale(.5);
+                color: #121212;
+                -webkit-text-stroke: 2px #cae7df;
+            }
+            20% {
+                transform: scale(1);
+                color: #23a2f6;
+                -webkit-text-stroke: 3px #ff512f;
+                filter: drop-shadow(0 0 1px #080710)drop-shadow(0 0 1px #080710)drop-shadow(0 0 3px #ff512f)drop-shadow(0 0 5px #ff512f)hue-rotate(10turn);
+            }
+            50% {
+                transform: scale(.5);
+                color: #121212;
+                -webkit-text-stroke: 2px gray;
+            }
+        }
     </style>
 </head>
 
@@ -365,6 +521,17 @@
         </div>
     </div>
     <div class="container">
+        <div id="loadingDiv">
+            <div class="loader">
+                <p>l</p>
+                <p>o</p>
+                <p>a</p>
+                <p>d</p>
+                <p>i</p>
+                <p>n</p>
+                <p>g</p>
+            </div>
+        </div>
         <div class="container-up">
             <div class="profile-div">
 
@@ -421,14 +588,44 @@
                 <h2>${data[0].email}</h2>
                 </div>
                 `;
-                })
-                .catch(error => console.log(error));
 
+                });
+
+            const followData = await fetch('/followlog')
+                .then(res => res.json())
+                .then(data => {
+                    var numberOfFollows = 0;
+                    var numberOfFollowing = 0;
+                    data.forEach(follow => {
+                        if (follow.followingname == "<%= username %>") {
+                            numberOfFollows++;
+                        }
+                        if (follow.followername == "<%= username %>") {
+                            numberOfFollowing++;
+                        }
+                    })
+                    var profileInfoDiv = document.querySelector('.profile-info-div');
+                    if (numberOfFollows != 1)
+                        profileInfoDiv.innerHTML += `
+                    <h2 class="profile-info-posts">${numberOfFollows} Followers</h2>
+                    <h2 class="profile-info-posts">${numberOfFollowing} Following</h2>
+                    `;
+                    else
+                        profileInfoDiv.innerHTML += `
+                    <h2 class="profile-info-posts">${numberOfFollows} Follower</h2>
+                    <h2 class="profile-info-posts">${numberOfFollowing} Following</h2>
+                    `;
+                })
             const postData = await fetch('/posts/' + stringname).
             then(response => response.json()).then(data => {
                 var profileInfoDiv = document.querySelector('.profile-info-div');
-                profileInfoDiv.innerHTML = `
+                if (data.length != 1)
+                    profileInfoDiv.innerHTML += `
                 <h2 class="profile-info-posts">${data.length} Posts</h2>
+                `;
+                else
+                    profileInfoDiv.innerHTML += `
+                <h2 class="profile-info-posts">${data.length} Post</h2>
                 `;
                 data.forEach(post => {
                     var date = new Date(post.reviewdate).toDateString();
@@ -478,7 +675,6 @@
                 }
             });
         }
-        fetchData();
 
         function convert(str) {
             var date = new Date(str),
@@ -512,6 +708,7 @@
             d.setDate(d.getDate() - 364);
             var p = d;
             d = new Date();
+            //logging in table
             for (var i = 0; i < 7; i++) {
                 let activityRow = document.createElement('div');
                 activityRow.classList.add('activity-row');
@@ -541,7 +738,70 @@
                 activityGrid.appendChild(activityRow);
             }
         }
-        getActivity();
+        async function getFollows() {
+            var map = new Map();
+            const followData = await fetch('/follow/<%=currentUser%>')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    data.forEach(follow => {
+                        map.set(follow.followingid, true);
+                    })
+                });
+            if ('<%=currentUser%>' != '<%=id%>') {
+                if (map.has('<%=id%>')) {
+                    const actionDiv = document.querySelector('.profile-div');
+                    const followDiv = document.createElement('div');
+                    followDiv.classList.add('follow-div');
+                    followDiv.style.position = 'absolute';
+
+                    followDiv.style.display = 'flex';
+                    followDiv.style.justifyContent = 'center';
+                    followDiv.style.alignItems = 'center';
+                    followDiv.style.margin = '10px';
+                    followDiv.style.padding = '10px';
+                    followDiv.style.borderRadius = '10px';
+                    followDiv.style.color = '#f5f5f5';
+                    followDiv.style.cursor = 'pointer';
+                    followDiv.innerHTML = `
+                    <form action="/followlog/delete/<%=id%>" method="POST">
+                        <input type="hidden" name="followingname" value="<%=username%>"/>
+                        <input type="submit" class="unfollow-btn" value="Following"/>
+                    </form>
+                    `;
+                    actionDiv.appendChild(followDiv);
+                } else {
+                    const actionDiv = document.querySelector('.profile-div');
+                    const followDiv = document.createElement('div');
+                    followDiv.classList.add('follow-div');
+                    followDiv.style.position = 'absolute';
+
+                    followDiv.style.display = 'flex';
+                    followDiv.style.justifyContent = 'center';
+                    followDiv.style.alignItems = 'center';
+                    followDiv.style.margin = '10px';
+                    followDiv.style.padding = '10px';
+                    followDiv.style.borderRadius = '10px';
+                    followDiv.style.color = '#f5f5f5';
+                    followDiv.style.cursor = 'pointer';
+                    followDiv.innerHTML = `
+                    <form action = '/followlog' method = "POST">
+                        <input type="hidden" name="username" value="<%=currentUser%>"/>
+                        <input type="hidden" name="following" value="<%=id%>"/>
+                        <input type ="hidden" name="followingname" value="<%=username%>"/>
+                        <input type="submit" class="follow-btn" value="Follow" onclick="e=>e.preventDefault()"/>
+                    </form>
+                    `;
+                    actionDiv.appendChild(followDiv);
+                }
+            }
+        }
+        async function getData() {
+            document.getElementById('loadingDiv').style.display = 'block';
+            await fetchData(), getActivity(), getFollows();
+            document.getElementById('loadingDiv').style.display = 'none';
+        }
+        getData();
     </script>
 </body>
 

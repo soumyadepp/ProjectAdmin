@@ -11,7 +11,7 @@ const middlewares = require('../middleware/middlewares.js');
 router.get('/users/notifications', async(req, res) => {
     const session = req.session;
     if (session.userid) {
-        const resp = await pool.query('SELECT * from notifications where intendeduser = $1 limit 10', [session.userid]);
+        const resp = await pool.query('SELECT * from notifications where intendeduser = $1 order by notiftime asc', [session.userid]);
         res.send(resp.rows);
     } else {
         res.redirect('/unauth');

@@ -717,10 +717,7 @@
         <div class="right-container">
             <form class="tasks-form" action="/posts" method="POST">
                 <h2 class="task-header">Add a Code review</h2>
-                <div style="display: flex">
-                    <input class="task-input" type="date" name="date" required="required" style="margin-right: 5px;" placeholder="Enter deadline">
-                    <input class="task-input" type="text" name="title" required="required" placeholder="Title">
-                </div>
+                <input class="task-input" type="text" name="title" required="required" placeholder="Title">
                 <input class="task-input" type="text" name="image" placeholder="Image Link">
                 <textarea class="task-input-ta" type="text" name="task" required="required" placeholder="Review Here" rows="9"></textarea>
                 <button class="submit-btn" type="submit">Add</button>
@@ -739,10 +736,6 @@
             </div>
             <div class="mobile-header-element">
                 <h2><a style="color:#f5f5f5; font-size:3vmin; text-decoration:none;" href=" /users/<%= user %>">Profile</a></h2>
-                <span class="task-span"></span>
-            </div>
-            <div class="mobile-header-element">
-                <h2><a style="color:#f5f5f5; font-size:3vmin; text-decoration:none;" href="/logout">Logout</a></h2>
                 <span class="task-span"></span>
             </div>
             <div class="mobile-header-element">

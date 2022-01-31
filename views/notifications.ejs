@@ -173,7 +173,7 @@
                     notifDiv.classList.add('notif-div');
                     notifDiv.innerHTML = `
                         <div class="notif-body">
-                            <p><a href="/users/${notif.actionuser}">${notif.actionuser}</a> liked your post</p>
+                            <p><a href="/users/${notif.actionuser}">${notif.body}</a></p>
                         </div>
                     `;
                     document.querySelector('.list-container').appendChild(notifDiv);

@@ -34,12 +34,12 @@ router.post('/posts/likes/mylike', async(req, res) => {
                 if (resp.rows.length === 0) {
                     const response = await pool.query('INSERT INTO likes (lid,username,postid) VALUES ($1,$2,$3)', [id, session.userid, req.body.postid]).then(() => {
                         console.log('success');
-                        res.redirect('/users/' + session.userid);
+                        res.redirect('back');
                     }).catch(error => {
                         console.log(error);
                     });
                     if (usernameIntended != session.userid) {
-                        const responseNotif = await pool.query('INSERT INTO notifications(nid,body,intendeduser,postid,actionuser) values($1,$2,$3,$4,$5)', [id, `${session.userid} liked your post.`, usernameIntended, req.body.postid, session.userid])
+                        const responseNotif = await pool.query('INSERT INTO notifications(nid,body,intendeduser,postid,actionuser,notiftime) values($1,$2,$3,$4,$5,NOW())', [id, `${session.userid} liked your post.`, usernameIntended, req.body.postid, session.userid])
                             .then(() => {
                                 console.log('notification sent');
                             })
@@ -49,7 +49,7 @@ router.post('/posts/likes/mylike', async(req, res) => {
                     }
                 } else {
                     const resp = await pool.query('DELETE FROM likes WHERE postid = $1 AND username = $2', [req.body.postid, session.userid]).then(() => {
-                        res.redirect('/users/' + session.userid);
+                        res.redirect('back');
                     }).catch(error => {
                         console.log(error);
                     });

@@ -19,6 +19,7 @@ const postRoutes = require('./routes/posts.js');
 const likeRoutes = require('./routes/likes.js');
 const notificationRoutes = require('./routes/notifications.js');
 const activityRoutes = require('./routes/activity.js');
+const followRoutes = require('./routes/followlog.js');
 //use a body parser to get beautified output
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,6 +44,8 @@ app.use(notificationRoutes);
 //notif routes
 app.use(activityRoutes);
 //activity routes
+app.use(followRoutes);
+//follow routes
 app.get('/', (req, res) => {
     res.render('index', { user: req.session.userid });
 });
@@ -94,8 +97,16 @@ app.get('/users/:id', async(req, res) => {
     try {
         const resp = await pool.query('SELECT * FROM users WHERE username = $1', [req.params.id]);
         if (resp.rows.length > 0) {
+
             if (req.session.userid)
-                res.render('userhome', { user: req.params.id == req.session.userid ? "My profile" : req.params.id, username: req.params.id, sessionUser: req.session.userid });
+                res.render('userhome', {
+                    user: req.params.id == req.session.userid ? "My profile" : req.params.id,
+                    username: req.params.id,
+                    sessionUser: req.session.userid,
+                    email: req.session.email,
+                    id: resp.rows[0].uid,
+                    currentUser: req.session.uid,
+                });
             else {
                 res.redirect('/unauth');
             }
