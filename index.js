@@ -97,7 +97,6 @@ app.get('/users/:id', async(req, res) => {
     try {
         const resp = await pool.query('SELECT * FROM users WHERE username = $1', [req.params.id]);
         if (resp.rows.length > 0) {
-
             if (req.session.userid)
                 res.render('userhome', {
                     user: req.params.id == req.session.userid ? "My profile" : req.params.id,

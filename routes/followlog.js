@@ -52,6 +52,20 @@ router.get('/followlog', async(req, res) => {
     }
 });
 
+router.get('/follows/users/:id', async(req, res) => {
+    const session = req.session;
+    if (session.userid) {
+        try {
+            const response = await pool.query('SELECT * FROM followlog WHERE followername = $1', [req.params.id]);
+            res.send(response.rows);
+        } catch (err) {
+            console.log(err);
+        }
+    } else {
+        res.redirect('/unauth');
+    }
+});
+
 router.get('/follow/:id', async(req, res) => {
     const session = req.session;
     if (session.userid) {

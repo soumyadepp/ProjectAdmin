@@ -12,10 +12,10 @@ if (process.env.NODE_ENV == 'development') {
     });
 } else {
     pool = new Pool({
-        user: 'sbdbznaeatagpp',
-        host: 'ec2-34-250-92-138.eu-west-1.compute.amazonaws.com',
-        database: 'dfaepnmck6hm7s',
-        password: 'c13c13f082a1266c66b62c08c3b18d4b5f32842adc031bdd60356ea6ca6ee555',
+        user: 'ahbsolhivzvgal',
+        host: 'ec2-52-214-125-106.eu-west-1.compute.amazonaws.com',
+        database: 'd1nhbqs812rf82',
+        password: 'f3adbb43159d048c6ca0e9c93fa5bee2206ff5849a4405959abfaac61e42a586',
         port: 5432,
         ssl: { rejectUnauthorized: false },
     });
